@@ -27,7 +27,7 @@
 2. Make changes such that the COUNT is #10 (decimal 10)
 3. What are the numbers shown in the console?
 
-4. What is the last character and why isn't it decimal 10?
+4. What is the **first** character and why isn't it decimal 10?
 
 ```lc3
 
@@ -38,7 +38,7 @@
 
 #### addnums.asm
 1. Copy the file from the instructor/week_6 to your week_6 folder
-2. Change the file such that the final count is x0085
+2. Change the file such that the **final sum is x0085 (the original sum is 55)**
 2. Run in the simulator and provide a screenshot showing the result when the program has finished. 
 ![](../../../changethistoimagename.png)
 
