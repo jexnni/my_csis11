@@ -20,6 +20,8 @@
 ; x300A - MATCH, value for comparison
 ; x300B - COUNT, in ASCII to show number of shifts
 
+;VALUE xB0B0 and MATCH is x1600
+
         .ORIG x3000     ; 
         LD R1, VALUE    ; load the value to shift into R1
         LD R2, MATCH    ; load value to match in to R2
@@ -37,7 +39,7 @@ SHIFT   ADD R1, R1, R1  ; shift the value left
         BRnp SHIFT       ; continue until MATCH is true
 
 EXIT    HALT            ; stop the program
-VALUE   .FILL x0A0A     ; value to shift
-MATCH   .FILL xA0A0     ; desired match for VALUE
+VALUE   .FILL xB0B0     ; value to shift
+MATCH   .FILL x1600     ; desired match for VALUE
 COUNT   .FILL x0030     ; Used for showing count in ASCII
         .END            ; end of source code
