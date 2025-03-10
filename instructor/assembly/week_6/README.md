@@ -31,7 +31,26 @@
 
 ```lc3
 
-; remove this comment and paste your code here
+; 3. :987654321Halting computer
+
+; 4. In hex, there is no 10 value, the ascii is assigned the ':' colon character
+
+        .ORIG x3000     ; start of code
+        LD R1, VALUE    ; load the value to shift into R1
+        LD R2, COUNT    ; load counter value in to R2
+        LD R3, ASCII    ; load the ASCII increment into R3
+
+SHIFT   ADD R1, R1, R1  ; shift the value left
+        ADD R0, R2, R3  ; convert COUNT to ASCII
+        OUT             ; output the COUNT ASCII value
+        ADD R2, R2, #-1 ; decrement COUNT
+        BRp SHIFT       ; continue until counter goes to 0
+
+        HALT            ; stop the program
+VALUE   .FILL x0A0A     ; value to shift
+COUNT   .FILL #10        ; number of shifts (n, n-1, n-2, ... 1)
+ASCII   .FILL x0030     ; increment for making a number, ASCII
+        .END            ; end of source code
 
 ```
 
@@ -42,13 +61,39 @@
 2. Run in the simulator and provide a screenshot showing the result when the program has finished. 
 ![](../../../changethistoimagename.png)
 
+
+
 #### addnums.asm -> subnums.asm
 1. Copy the file from the instructor/week_6 to your week_6 folder
 2. Change the file such that the values are **subtracted**, instead of added
 2. Paste the complete code here, in between the code fences
 ```lc3
 
-; remove this comment and paste your code here
+.ORIG x3000            ; start of code
+        AND R1, R1, x0 ; clear R1, running sum
+        AND R4, R4, x0 ; clear R4, counter
+        LD  R4, N_DATA ; load R4 with number of data points
+        LEA R2, DATA   ; load the starting address of the data
+
+LOOP    LDR R3, R2, x0 ; load the next number to be added
+        ADD R2, R2, #-1 ; increment the pointer
+        ADD R1, R1, R3 ; add the next number to the running sum
+        ADD R4, R4, #-1 ; decrement the counter
+        BRp LOOP       ; do it again if the counter is not yet zero
+        HALT           ; halt
+
+N_DATA  .FILL x0A      ; number of data elements
+DATA    .FILL x01      ; first data element
+        .FILL x02    
+        .FILL x03    
+        .FILL x04    
+        .FILL x05    
+        .FILL x06    
+        .FILL x07    
+        .FILL x08    
+        .FILL x09 
+        .FILL x0A   
+        .END
 
 ```
  

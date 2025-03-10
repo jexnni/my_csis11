@@ -21,13 +21,13 @@
         LEA R2, DATA   ; load the starting address of the data
 
 LOOP    LDR R3, R2, x0 ; load the next number to be added
-        ADD R2, R2, #1 ; increment the pointer
+        ADD R2, R2, #-1 ; increment the pointer
         ADD R1, R1, R3 ; add the next number to the running sum
         ADD R4, R4, #-1 ; decrement the counter
         BRp LOOP       ; do it again if the counter is not yet zero
         HALT           ; halt
 
-N_DATA  .FILL x0B      ; number of data elements, just add one more number = 30
+N_DATA  .FILL x0A      ; number of data elements
 DATA    .FILL x01      ; first data element
         .FILL x02    
         .FILL x03    
@@ -38,5 +38,4 @@ DATA    .FILL x01      ; first data element
         .FILL x08    
         .FILL x09 
         .FILL x0A   
-        .FILL x1E      ; add 30 to sum
         .END

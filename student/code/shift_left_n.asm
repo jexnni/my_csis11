@@ -32,6 +32,6 @@ SHIFT   ADD R1, R1, R1  ; shift the value left
 
         HALT            ; stop the program
 VALUE   .FILL x0A0A     ; value to shift
-COUNT   .FILL #4        ; number of shifts (n, n-1, n-2, ... 1)
+COUNT   .FILL #10        ; number of shifts (n, n-1, n-2, ... 1)
 ASCII   .FILL x0030     ; increment for making a number, ASCII
         .END            ; end of source code
