@@ -121,7 +121,15 @@ For each exercise, please do the following:
 
 ```lc3
 
-; remove this comment and paste your code here
+        .ORIG x3000     ; start program
+        LD R1, COUNT    ; load count into R1
+        ADD R1, R1, #1  ; increment by 1
+        ST R1, COUNT    ; store back into count
+
+EXIT    HALT            ; stop the program
+COUNT   .FILL #5        ; count starts at 5
+        .END            ; end of source code
+
 
 ```
 
@@ -136,7 +144,21 @@ For each exercise, please do the following:
 
 ```lc3
 
-; remove this comment and paste your code here
+; Yes, because all the registers loaded 'Total', or the most recent .FILL
+
+        .ORIG x3000     ; start program
+        LD R1, TOTAL    ; load count into R1
+        LD R2, total    ; load count into R2        
+        LD R3, Total    ; load count into R3
+                        ; the registers all correspond to their .FILL
+                        
+
+EXIT    HALT            ; stop the program
+TOTAL   .FILL   #10
+total   .FILL   #20
+Total   .FILL   #30     
+        .END            ; end of source code
+
 
 ```
 
@@ -148,7 +170,18 @@ For each exercise, please do the following:
 
 ```lc3
 
-; remove this comment and paste your code here
+        .ORIG x3000     ; start
+        LD R1, PTR      ; R1 has PTR
+        LDI R2, PTR     ; R2 points to where PTR, R1
+        ADD R2, R2, #1  ; increment R2
+        STI R2, PTR     ; store R2 in PTR
+
+        HALT
+
+PTR     .FILL x3100
+VALUE   .FILL #10
+
+        .END
 
 ```
 
@@ -163,6 +196,36 @@ For each exercise, please do the following:
 
 ```lc3
 
-; remove this comment and paste your code here
+        .ORIG x3000     ; start
+        LD R0, VALUE1
+        LD R1, VALUE2
+
+        LD R2, PLUS
+        LD R3, MINUS
+
+        LD R4, SUM
+        LD R5, DIFF
+
+;Addition
+        ADD R2, R0, R1  ; Add R0 and R1
+        ST R4, SUM
+
+;Subtration
+
+        NOT R1, R1      ; take not of R1
+        ADD R1, R1, #1  ; two's complement by add +1
+        ADD R3, R0, R1  ; Add R0 and two's complement R1
+        ST R5, DIFF
+
+        HALT
+
+
+PLUS    .FILL #43
+MINUS   .FILL #45
+VALUE1  .FILL #10
+VALUE2  .FILL #5
+SUM     .FILL x0
+DIFF    .FILL x0
+        .END
 
 ```
