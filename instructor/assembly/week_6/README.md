@@ -3,7 +3,7 @@
 
 1. **Copy and paste this content into a new file in Week 6 in your student folder.**
 2. Follow the assignment by writing code or pasting images from the simulator into **your file**.
-3. All supplied programs will be in the *code* folder for that specific week
+3. All supplied programs will be in the *code* folder for that specific week 
 
 ## 6a - Learn how to use the tools
 
@@ -19,7 +19,7 @@
 1. Copy the file from the instructor/week_6 to your week_6 folder
 1. Make changes such that VALUE is xB0B0 and MATCH is x1600
 2. Run in the simulator and provide a screenshot showing the result when the program has **successfully** finished. 
-![](../../../changethistoimagename.png)
+![](../../../images/hw6/hw6_1.PNG)
 
 #### shift_left_n.asm
 
@@ -31,7 +31,26 @@
 
 ```lc3
 
-; remove this comment and paste your code here
+; 3. :987654321Halting computer
+
+; 4. In hex, there is no 10 value, the ascii is assigned the ':' colon character
+
+        .ORIG x3000     ; start of code
+        LD R1, VALUE    ; load the value to shift into R1
+        LD R2, COUNT    ; load counter value in to R2
+        LD R3, ASCII    ; load the ASCII increment into R3
+
+SHIFT   ADD R1, R1, R1  ; shift the value left
+        ADD R0, R2, R3  ; convert COUNT to ASCII
+        OUT             ; output the COUNT ASCII value
+        ADD R2, R2, #-1 ; decrement COUNT
+        BRp SHIFT       ; continue until counter goes to 0
+
+        HALT            ; stop the program
+VALUE   .FILL x0A0A     ; value to shift
+COUNT   .FILL #10        ; number of shifts (n, n-1, n-2, ... 1)
+ASCII   .FILL x0030     ; increment for making a number, ASCII
+        .END            ; end of source code
 
 ```
 
@@ -42,13 +61,39 @@
 2. Run in the simulator and provide a screenshot showing the result when the program has finished. 
 ![](../../../changethistoimagename.png)
 
+
+
 #### addnums.asm -> subnums.asm
 1. Copy the file from the instructor/week_6 to your week_6 folder
 2. Change the file such that the values are **subtracted**, instead of added
 2. Paste the complete code here, in between the code fences
 ```lc3
 
-; remove this comment and paste your code here
+.ORIG x3000            ; start of code
+        AND R1, R1, x0 ; clear R1, running sum
+        AND R4, R4, x0 ; clear R4, counter
+        LD  R4, N_DATA ; load R4 with number of data points
+        LEA R2, DATA   ; load the starting address of the data
+
+LOOP    LDR R3, R2, x0 ; load the next number to be added
+        ADD R2, R2, #-1 ; increment the pointer
+        ADD R1, R1, R3 ; add the next number to the running sum
+        ADD R4, R4, #-1 ; decrement the counter
+        BRp LOOP       ; do it again if the counter is not yet zero
+        HALT           ; halt
+
+N_DATA  .FILL x0A      ; number of data elements
+DATA    .FILL x01      ; first data element
+        .FILL x02    
+        .FILL x03    
+        .FILL x04    
+        .FILL x05    
+        .FILL x06    
+        .FILL x07    
+        .FILL x08    
+        .FILL x09 
+        .FILL x0A   
+        .END
 
 ```
  
@@ -76,7 +121,15 @@ For each exercise, please do the following:
 
 ```lc3
 
-; remove this comment and paste your code here
+        .ORIG x3000     ; start program
+        LD R1, COUNT    ; load count into R1
+        ADD R1, R1, #1  ; increment by 1
+        ST R1, COUNT    ; store back into count
+
+EXIT    HALT            ; stop the program
+COUNT   .FILL #5        ; count starts at 5
+        .END            ; end of source code
+
 
 ```
 
@@ -91,7 +144,21 @@ For each exercise, please do the following:
 
 ```lc3
 
-; remove this comment and paste your code here
+; Yes, because all the registers loaded 'Total', or the most recent .FILL
+
+        .ORIG x3000     ; start program
+        LD R1, TOTAL    ; load count into R1
+        LD R2, total    ; load count into R2        
+        LD R3, Total    ; load count into R3
+                        ; the registers all correspond to their .FILL
+                        
+
+EXIT    HALT            ; stop the program
+TOTAL   .FILL   #10
+total   .FILL   #20
+Total   .FILL   #30     
+        .END            ; end of source code
+
 
 ```
 
@@ -103,7 +170,18 @@ For each exercise, please do the following:
 
 ```lc3
 
-; remove this comment and paste your code here
+        .ORIG x3000     ; start
+        LD R1, PTR      ; R1 has PTR
+        LDI R2, PTR     ; R2 points to where PTR, R1
+        ADD R2, R2, #1  ; increment R2
+        STI R2, PTR     ; store R2 in PTR
+
+        HALT
+
+PTR     .FILL x3100
+VALUE   .FILL #10
+
+        .END
 
 ```
 
@@ -118,6 +196,36 @@ For each exercise, please do the following:
 
 ```lc3
 
-; remove this comment and paste your code here
+        .ORIG x3000     ; start
+        LD R0, VALUE1
+        LD R1, VALUE2
+
+        LD R2, PLUS
+        LD R3, MINUS
+
+        LD R4, SUM
+        LD R5, DIFF
+
+;Addition
+        ADD R2, R0, R1  ; Add R0 and R1
+        ST R4, SUM
+
+;Subtration
+
+        NOT R1, R1      ; take not of R1
+        ADD R1, R1, #1  ; two's complement by add +1
+        ADD R3, R0, R1  ; Add R0 and two's complement R1
+        ST R5, DIFF
+
+        HALT
+
+
+PLUS    .FILL #43
+MINUS   .FILL #45
+VALUE1  .FILL #10
+VALUE2  .FILL #5
+SUM     .FILL x0
+DIFF    .FILL x0
+        .END
 
 ```
