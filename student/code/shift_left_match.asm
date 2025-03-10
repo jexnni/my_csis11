@@ -14,7 +14,7 @@
 ; R1 - VALUE to shift
 ; R2 - MATCHing value
 ; R4 - Scratch register
-; Memory:
+; Memory:  S
 ; x3000 - start of program
 ; x3009 - VALUE, number to shift
 ; x300A - MATCH, value for comparison

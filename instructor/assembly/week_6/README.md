@@ -3,7 +3,7 @@
 
 1. **Copy and paste this content into a new file in Week 6 in your student folder.**
 2. Follow the assignment by writing code or pasting images from the simulator into **your file**.
-3. All supplied programs will be in the *code* folder for that specific week
+3. All supplied programs will be in the *code* folder for that specific week 
 
 ## 6a - Learn how to use the tools
 
